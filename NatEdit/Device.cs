@@ -17,6 +17,8 @@ namespace NatEdit
             ExternalIP = device.GetExternalIP();
             LocalIP = device.DeviceEndpoint.Address;
             Name = $"{ExternalIP}/{LocalIP}";
+            if (device.DeviceName != null)
+                Name += ", " + device.DeviceName;
         }
 
         public override bool Equals(object obj)

@@ -31,14 +31,15 @@ namespace Mono.Nat.Upnp
 {
 	sealed class CreatePortMappingMessage : RequestMessage
 	{
-		IPAddress LocalIpAddress { get; }
+		//IPAddress LocalIpAddress { get; }
 		Mapping Mapping { get; }
 
-		public CreatePortMappingMessage (Mapping mapping, IPAddress localIpAddress, UpnpNatDevice device)
-			: base (device, "AddPortMapping")
+        //public CreatePortMappingMessage (Mapping mapping, IPAddress localIpAddress, UpnpNatDevice device)
+        public CreatePortMappingMessage(Mapping mapping, UpnpNatDevice device)
+            : base (device, "AddPortMapping")
 		{
 			Mapping = mapping;
-			LocalIpAddress = localIpAddress;
+			//LocalIpAddress = localIpAddress;
 		}
 
 		public override void Encode (XmlWriter writer)
@@ -47,7 +48,7 @@ namespace Mono.Nat.Upnp
 			WriteFullElement (writer, "NewExternalPort", Mapping.PublicPort);
 			WriteFullElement (writer, "NewProtocol", Mapping.Protocol);
 			WriteFullElement (writer, "NewInternalPort", Mapping.PrivatePort);
-			WriteFullElement (writer, "NewInternalClient", LocalIpAddress);
+			WriteFullElement (writer, "NewInternalClient", Mapping.PrivateAddress);
 			WriteFullElement (writer, "NewEnabled", "1");
 			WriteFullElement (writer, "NewPortMappingDescription", string.IsNullOrEmpty (Mapping.Description) ? "Mono.Nat" : Mapping.Description);
 			WriteFullElement (writer, "NewLeaseDuration", Mapping.Lifetime);

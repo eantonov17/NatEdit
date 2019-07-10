@@ -42,29 +42,30 @@ namespace Mono.Nat.Upnp
 		/// <summary>
 		/// The url we can use to control the port forwarding
 		/// </summary>
-		internal Uri DeviceControlUri { get; private set; }
+		internal Uri DeviceControlUri { get; }
 
 		/// <summary>
 		/// The IP address of the LAN device (the current machine)
 		/// </summary>
-		IPAddress LocalAddress { get; }
+		//IPAddress LocalAddress { get; }
 
 		/// <summary>
 		/// The service type we're using on the device
 		/// </summary>
-		public string ServiceType { get; private set; }
+		public string ServiceType { get;}
 
-		internal UpnpNatDevice (IPAddress localAddress, IPEndPoint deviceEndpoint, Uri deviceControlUri, string serviceType)
-			: base (deviceEndpoint, NatProtocol.Upnp)
+        //internal UpnpNatDevice(IPAddress localAddress, IPEndPoint deviceEndpoint, Uri deviceControlUri, string serviceType)
+        internal UpnpNatDevice(IPEndPoint deviceEndpoint, Uri deviceControlUri, string serviceType, string deviceName)
+            : base (deviceEndpoint, NatProtocol.Upnp, deviceName)
 		{
-			LocalAddress = localAddress;
+			//LocalAddress = localAddress;
 			DeviceControlUri = deviceControlUri;
 			ServiceType = serviceType;
-		}
+        }
 
 		public override async Task<Mapping> CreatePortMapAsync (Mapping mapping)
 		{
-			var message = new CreatePortMappingMessage (mapping, LocalAddress, this);
+			var message = new CreatePortMappingMessage (mapping, this);
 			var response = await SendMessageAsync (message).ConfigureAwait (false);
 			if (!(response is CreatePortMappingResponseMessage))
 				throw new MappingException (ErrorCode.Unknown, "Invalid response received when creating the port map");

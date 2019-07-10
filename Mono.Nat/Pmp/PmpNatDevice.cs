@@ -36,11 +36,11 @@ namespace Mono.Nat.Pmp
 	{
 		IPAddress PublicAddress { get; }
 
-		internal PmpNatDevice (IPEndPoint deviceEndpoint, IPAddress publicAddress)
-			: base (deviceEndpoint, NatProtocol.Pmp)
+		internal PmpNatDevice (IPEndPoint deviceEndpoint, IPAddress publicAddress, string deviceName)
+			: base (deviceEndpoint, NatProtocol.Pmp, deviceName)
 		{
 			PublicAddress = publicAddress;
-		}
+        }
 
 		public override async Task<Mapping> CreatePortMapAsync (Mapping mapping)
 		{

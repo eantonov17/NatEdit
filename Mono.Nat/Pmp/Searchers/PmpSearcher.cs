@@ -136,9 +136,10 @@ namespace Mono.Nat.Pmp
 			}
 		}
 
-		protected override Task HandleMessageReceived (IPAddress localAddress, UdpReceiveResult result, CancellationToken token)
-		{
-			var response = result.Buffer;
+		//protected override Task HandleMessageReceived (IPAddress localAddress, UdpReceiveResult result, CancellationToken token)
+        protected override Task HandleMessageReceived(UdpReceiveResult result, CancellationToken token)
+        {
+            var response = result.Buffer;
 			var endpoint = result.RemoteEndPoint;
 
 			if (response.Length != 12)
@@ -154,7 +155,7 @@ namespace Mono.Nat.Pmp
 
 			var publicIp = new IPAddress (new byte [] { response [8], response [9], response [10], response [11] });
 
-			RaiseDeviceFound (new PmpNatDevice (endpoint, publicIp));
+			RaiseDeviceFound (new PmpNatDevice (endpoint, publicIp, string.Empty));
 			return Task.CompletedTask;
 		}
 	}

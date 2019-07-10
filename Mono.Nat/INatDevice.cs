@@ -39,10 +39,15 @@ namespace Mono.Nat
 		/// </summary>
 		IPEndPoint DeviceEndpoint { get; }
 
-		/// <summary>
-		/// The UTC time the last message was received from the WAN device.
-		/// </summary>
-		DateTime LastSeen { get; }
+        /// <summary>
+        /// Router model
+        /// </summary>
+        string DeviceName { get; }
+
+        /// <summary>
+        /// The UTC time the last message was received from the WAN device.
+        /// </summary>
+        DateTime LastSeen { get; }
 
 		/// <summary>
 		/// The NAT protocol supported by the WAN device (e.g. NAT-PMP or uPnP)

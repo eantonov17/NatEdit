@@ -42,12 +42,12 @@ namespace NatEdit
             if (found)
             {
                 DevicesComboBox.Items.Add(device);
-                DeviceDiscoveryLabel.Text = $"{DateTime.Now}: Found device {device}";
+                DeviceDiscoveryLabel.Text = $"{DateTime.Now} found {device}";
             }
             else
             {
                 DevicesComboBox.Items.Remove(device);
-                DeviceDiscoveryLabel.Text = $"{DateTime.Now}: Lost device {device}";
+                DeviceDiscoveryLabel.Text = $"{DateTime.Now} lost {device}";
             }
 
             var deviceCount = DevicesComboBox.Items.Count;
@@ -191,6 +191,18 @@ namespace NatEdit
 
             if (res == DialogResult.OK)
                 await Device.NatDevice.DeletePortMapAsync(selected.Mapping).ConfigureAwait(false);
+        }
+
+        private void MappingInfoButton_Click(object sender, EventArgs e)
+        {
+            if (Device == null || !(MappingsListBox.SelectedItem is MappingItem selected))
+                return;
+
+            var m = selected.Mapping;
+            var info = $"{selected}\nExpiration={m.Expiration}";
+
+            var res = MessageBox.Show(this, info, "Mapping info", MessageBoxButtons.OK,
+                MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
         }
     }
 }
