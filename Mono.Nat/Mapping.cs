@@ -125,6 +125,7 @@ namespace Mono.Nat
         {
             return other != null
                 && Protocol == other.Protocol
+                && PrivateAddress == other.PrivateAddress
                 && PrivatePort == other.PrivatePort
                 && PublicPort == other.PublicPort;
         }
