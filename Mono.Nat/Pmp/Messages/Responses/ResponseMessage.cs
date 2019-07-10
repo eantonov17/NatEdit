@@ -56,7 +56,7 @@ namespace Mono.Nat.Pmp
 			if (publicPort < 0 || privatePort < 0 || resultCode != ErrorCode.Success)
 				throw new MappingException ((ErrorCode) resultCode, "Could not modify the port map");
 
-			var mapping = new Mapping (protocol, "", privatePort, publicPort, (int) lifetime, null);
+			var mapping = new Mapping(protocol, "", publicPort, "", privatePort, null, (int)lifetime);
 			return new MappingResponseMessage (mapping);
 		}
 	}

@@ -41,7 +41,7 @@ namespace Mono.Nat.Upnp
 		public override void Encode (XmlWriter writer)
 		{
 			WriteFullElement (writer, "NewRemoteHost", "");
-			WriteFullElement (writer, "NewExternalPort", Mapping.PublicPort);
+			WriteFullElement (writer, "NewExternalPort", Mapping.RouterPort);
 			WriteFullElement (writer, "NewProtocol", Mapping.Protocol);
 		}
 	}

@@ -49,9 +49,9 @@ namespace Mono.Nat.Pmp
 			package.Add (Mapping.Protocol == Protocol.Tcp ? PmpConstants.OperationCodeTcp : PmpConstants.OperationCodeUdp);
 			package.Add ((byte) 0); //reserved
 			package.Add ((byte) 0); //reserved
-			package.AddRange (BitConverter.GetBytes (IPAddress.HostToNetworkOrder ((short) Mapping.PrivatePort)));
+			package.AddRange (BitConverter.GetBytes (IPAddress.HostToNetworkOrder ((short) Mapping.LocalPort)));
 			if (Create) {
-				package.AddRange (BitConverter.GetBytes (IPAddress.HostToNetworkOrder ((short) Mapping.PublicPort)));
+				package.AddRange (BitConverter.GetBytes (IPAddress.HostToNetworkOrder ((short) Mapping.RouterPort)));
 				package.AddRange (BitConverter.GetBytes (IPAddress.HostToNetworkOrder (Mapping.Lifetime == 0 ? 7200 : Mapping.Lifetime)));
 			} else {
 				package.AddRange (BitConverter.GetBytes ((short) 0));

@@ -153,7 +153,7 @@ namespace NatEdit
 
             MappingsListBox.EndUpdate();
             MappingsLabel.Text = status;
-            MappingUpdateLabel.Text = $"{DateTime.Now}: mappings discovery completed";
+            MappingUpdateLabel.Text = $"{DateTime.Now}: mappings discovery done";
         }
 
         private void DevicesComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -203,6 +203,14 @@ namespace NatEdit
 
             var res = MessageBox.Show(this, info, "Mapping info", MessageBoxButtons.OK,
                 MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
+        }
+
+        private void CreateMappingButton_Click(object sender, EventArgs e)
+        {
+            if (Device == null || !(MappingsListBox.SelectedItem is MappingItem selected))
+                return;
+
+            new CreateMappingForm(Device, selected).ShowDialog(this);
         }
     }
 }

@@ -55,26 +55,36 @@ namespace Mono.Nat
         public Protocol Protocol { get; }
 
         /// <summary>
-        /// The internal/LAN port which will receive traffic sent to the <see cref="PublicPort"/> on the WAN device.
+        /// The internal/LAN address which will receive traffic
         /// </summary>
-        public int PrivatePort { get; }
+        public string LocalAddress { get; }
 
         /// <summary>
-        /// The internal/LAN address which will receive traffic sent to the <see cref="PublicPort"/> on the WAN device.
+        /// The internal/LAN port which will receive traffic
         /// </summary>
-        public string PrivateAddress { get; }
+        public int LocalPort { get; }
 
         /// <summary>
-        /// Traffic sent to this external/WAN port is forwarded to the <see cref="PrivatePort"/> on the LAN device.
+        /// The internal/LAN address of the router which will send traffic
         /// </summary>
-        public int PublicPort { get; }
+        public string RouterAddress { get; }
 
         /// <summary>
-        /// Create a port mapping so traffic sent to the <paramref name="publicPort"/> on the WAN device is sent to the <paramref name="privatePort"/> on the LAN device.
+        /// The internal/LAN port which will send traffic
+        /// </summary>
+        public int RouterPort { get; }
+
+        /// <summary>
+        /// Output of ToString()
+        /// </summary>
+        public string Name { get; }
+
+        /// <summary>
+        /// Create a port mapping so traffic sent to the <paramref name="routerPort"/> on the WAN device is sent to the <paramref name="localPort"/> on the LAN device.
         /// </summary>
         /// <param name="protocol">The protocol used by the port mapping.</param>
-        /// <param name="privatePort">The internal/LAN port which will receive traffic sent to the <paramref name="publicPort"/> on the WAN device.</param>
-        /// <param name="publicPort">Traffic sent to this external/WAN port is forwarded to the <paramref name="privatePort"/> on the LAN device.</param>
+        /// <param name="localPort">The internal/LAN port which will receive traffic sent to the <paramref name="routerPort"/> on the WAN device.</param>
+        /// <param name="routerPort">Traffic sent to this external/WAN port is forwarded to the <paramref name="localPort"/> on the LAN device.</param>
         //  public Mapping (Protocol protocol, int privatePort, int publicPort)
         //	: this (protocol, privatePort, publicPort, 0, null)
         //{
@@ -88,14 +98,19 @@ namespace Mono.Nat
         /// <param name="publicPort">Traffic sent to this public/WAN port is forwarded to the <paramref name="privatePort"/> on the LAN device.</param>
         /// <param name="lifetime">The lifetime of the port mapping in seconds. If a lifetime of '0' is specified then the protocol default lifetime is used. uPnP defaults to 'indefinite' whereas NAT-PMP defaults to 7,200 seconds.</param>
         /// <param name="description">The text description for the port mapping.</param>
-        public Mapping(Protocol protocol, string privateAddress, int privatePort, int publicPort, int lifetime, string description)
+        public Mapping(Protocol protocol, string routerAddress, int routerPort, string localAddress, int localPort, string description, int lifetime)
         {
             Protocol = protocol;
-            PrivateAddress = privateAddress;
-            PrivatePort = privatePort;
-            PublicPort = publicPort;
+            RouterAddress = routerAddress;
+            RouterPort = routerPort;
+            LocalAddress = localAddress;
+            LocalPort = localPort;
+            Description = description?.Trim();
+            Name = $"{Protocol}:{RouterAddress}:{RouterPort} -> {LocalAddress}:{LocalPort}";
+            if (!string.IsNullOrWhiteSpace(Description))
+                Name += ", " + Description;
+
             Lifetime = lifetime;
-            Description = description;
 
             if (lifetime == int.MaxValue)
                 Expiration = DateTime.MaxValue;
@@ -105,38 +120,30 @@ namespace Mono.Nat
                 Expiration = DateTime.Now.AddSeconds(lifetime);
         }
 
-        public bool IsExpired()
-            => Expiration < DateTime.Now;
+        public bool IsExpired() => Expiration < DateTime.Now;
 
         /// <summary>
         /// Mappings are considered equal if they have the same PrivatePort, PublicPort and Protocol.
         /// </summary>
         /// <param name="obj">The other object to compare with</param>
         /// <returns></returns>
-        public override bool Equals(object obj)
-            => Equals(obj as Mapping);
+        public override bool Equals(object obj) => Equals(obj as Mapping);
 
         /// <summary>
         /// Mappings are considered equal if they have the same PrivatePort, PublicPort and Protocol.
         /// </summary>
         /// <param name="other">The other mapping to compare with</param>
         /// <returns></returns>
-        public bool Equals(Mapping other)
-        {
-            return other != null
+        public bool Equals(Mapping other) => other != null
                 && Protocol == other.Protocol
-                && PrivateAddress == other.PrivateAddress
-                && PrivatePort == other.PrivatePort
-                && PublicPort == other.PublicPort;
-        }
+                && LocalAddress == other.LocalAddress
+                && LocalPort == other.LocalPort
+                && RouterAddress == other.RouterAddress
+                && RouterPort == other.RouterPort;
 
         public override int GetHashCode()
-            => Protocol.GetHashCode() ^ PrivatePort.GetHashCode() ^ PublicPort.GetHashCode();
+            => Protocol.GetHashCode() ^ LocalPort.GetHashCode() ^ RouterPort.GetHashCode();
 
-        public override string ToString()
-        {
-            return string.Format("Protocol: {0}, Public Port: {1}, Private Port: {2}, Description: {3}, Expiration: {4}, Lifetime: {5}",
-                Protocol, PublicPort, PrivatePort, Description, Expiration, Lifetime);
-        }
+        public override string ToString() => Name;
     }
 }

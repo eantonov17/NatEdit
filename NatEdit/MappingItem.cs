@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace NatEdit
 {
-    class MappingItem : IEquatable<MappingItem>
+    public class MappingItem : IEquatable<MappingItem>
     {
         public readonly Mapping Mapping;
 
@@ -16,6 +16,6 @@ namespace NatEdit
 
         public override int GetHashCode() => 1416879085 + EqualityComparer<Mapping>.Default.GetHashCode(Mapping);
 
-        public override string ToString() => $"{Mapping.Protocol}:{Mapping.PublicPort} -> {Mapping.PrivateAddress}:{Mapping.PrivatePort}, {Mapping.Description}";
+        public override string ToString() => $"{Mapping.Protocol}:{Mapping.RouterPort} -> {Mapping.LocalAddress}:{Mapping.LocalPort}, {Mapping.Description}";
     }
 }

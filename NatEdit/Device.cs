@@ -4,7 +4,7 @@ using System.Net;
 
 namespace NatEdit
 {
-    class Device
+    public class Device
     {
         public readonly INatDevice NatDevice;
         public readonly IPAddress ExternalIP;

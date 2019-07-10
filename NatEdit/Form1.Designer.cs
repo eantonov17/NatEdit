@@ -40,6 +40,7 @@
             this.DeviceDiscoveryLabel = new System.Windows.Forms.Label();
             this.MappingUpdateLabel = new System.Windows.Forms.Label();
             this.DeleteMappingButton = new System.Windows.Forms.Button();
+            this.CreateMappingButton = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -140,11 +141,22 @@
             this.DeleteMappingButton.UseVisualStyleBackColor = true;
             this.DeleteMappingButton.Click += new System.EventHandler(this.DeleteMappingButton_Click);
             // 
+            // CreateMappingButton
+            // 
+            this.CreateMappingButton.Location = new System.Drawing.Point(15, 263);
+            this.CreateMappingButton.Name = "CreateMappingButton";
+            this.CreateMappingButton.Size = new System.Drawing.Size(112, 23);
+            this.CreateMappingButton.TabIndex = 9;
+            this.CreateMappingButton.Text = "Create Mapping";
+            this.CreateMappingButton.UseVisualStyleBackColor = true;
+            this.CreateMappingButton.Click += new System.EventHandler(this.CreateMappingButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(364, 298);
+            this.Controls.Add(this.CreateMappingButton);
             this.Controls.Add(this.DeleteMappingButton);
             this.Controls.Add(this.MappingUpdateLabel);
             this.Controls.Add(this.DeviceDiscoveryLabel);
@@ -181,6 +193,7 @@
         private System.Windows.Forms.Label DeviceDiscoveryLabel;
         private System.Windows.Forms.Label MappingUpdateLabel;
         private System.Windows.Forms.Button DeleteMappingButton;
+        private System.Windows.Forms.Button CreateMappingButton;
     }
 }
 

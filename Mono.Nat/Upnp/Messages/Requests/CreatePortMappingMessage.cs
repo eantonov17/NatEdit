@@ -45,10 +45,10 @@ namespace Mono.Nat.Upnp
 		public override void Encode (XmlWriter writer)
 		{
 			WriteFullElement (writer, "NewRemoteHost", "");
-			WriteFullElement (writer, "NewExternalPort", Mapping.PublicPort);
+			WriteFullElement (writer, "NewExternalPort", Mapping.RouterPort);
 			WriteFullElement (writer, "NewProtocol", Mapping.Protocol);
-			WriteFullElement (writer, "NewInternalPort", Mapping.PrivatePort);
-			WriteFullElement (writer, "NewInternalClient", Mapping.PrivateAddress);
+			WriteFullElement (writer, "NewInternalPort", Mapping.LocalPort);
+			WriteFullElement (writer, "NewInternalClient", Mapping.LocalAddress);
 			WriteFullElement (writer, "NewEnabled", "1");
 			WriteFullElement (writer, "NewPortMappingDescription", string.IsNullOrEmpty (Mapping.Description) ? "Mono.Nat" : Mapping.Description);
 			WriteFullElement (writer, "NewLeaseDuration", Mapping.Lifetime);
