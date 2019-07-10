@@ -75,9 +75,9 @@
             this.MappingsLabel.AutoSize = true;
             this.MappingsLabel.Location = new System.Drawing.Point(12, 112);
             this.MappingsLabel.Name = "MappingsLabel";
-            this.MappingsLabel.Size = new System.Drawing.Size(111, 13);
+            this.MappingsLabel.Size = new System.Drawing.Size(158, 13);
             this.MappingsLabel.TabIndex = 4;
-            this.MappingsLabel.Text = "No device discovered";
+            this.MappingsLabel.Text = "Waiting for mapping discovery...";
             // 
             // menuStrip1
             // 
@@ -126,9 +126,9 @@
             this.MappingUpdateLabel.AutoSize = true;
             this.MappingUpdateLabel.Location = new System.Drawing.Point(9, 239);
             this.MappingUpdateLabel.Name = "MappingUpdateLabel";
-            this.MappingUpdateLabel.Size = new System.Drawing.Size(150, 13);
+            this.MappingUpdateLabel.Size = new System.Drawing.Size(159, 13);
             this.MappingUpdateLabel.TabIndex = 7;
-            this.MappingUpdateLabel.Text = "Waiting for device discovery...";
+            this.MappingUpdateLabel.Text = "Mapping discovery in progress...";
             // 
             // Form1
             // 

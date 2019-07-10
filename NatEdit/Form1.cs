@@ -101,7 +101,7 @@ namespace NatEdit
                                 }
                                 status = "UPnP mappings:";
                                 foreach (Mapping mp in mappings)
-                                    mappingInfo.Add($"{mp.Protocol}://{Device?.ExternalIP}:{mp.PublicPort} -> {mp.PrivateAddress}:{mp.PrivatePort}, {mp.Description}");
+                                    mappingInfo.Add($"{mp.Protocol}:{mp.PublicPort} -> {mp.PrivateAddress}:{mp.PrivatePort}, {mp.Description}");
                                 break;
 
                             default:
@@ -130,19 +130,22 @@ namespace NatEdit
 
         private void UpdateMappingList(string status, string[] mappingInfo)
         {
-            MappingsLabel.Text = status;
             MappingsListBox.BeginUpdate();
             MappingsListBox.Items.Clear();
             MappingsListBox.Items.AddRange(mappingInfo);
             //if (mappingInfo.Length > 0)
             //    MappingsListBox.SelectedIndex = 0;
             MappingsListBox.EndUpdate();
-            MappingUpdateLabel.Text = $"{DateTime.Now}: mapping updated";
+            MappingsLabel.Text = status;
+            MappingUpdateLabel.Text = $"{DateTime.Now}: mappings updated";
         }
 
         private void DevicesComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             Device = DevicesComboBox.SelectedItem as Device;
+            MappingsListBox.Items.Clear();
+            MappingsLabel.Text = "Waiting for mapping discovery...";
+            MappingUpdateLabel.Text = $"{DateTime.Now}: updating mappings";
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
