@@ -33,14 +33,11 @@
             this.DevicesLabel = new System.Windows.Forms.Label();
             this.MappingsListBox = new System.Windows.Forms.ListBox();
             this.MappingsLabel = new System.Windows.Forms.Label();
-            this.CreateMappingButton = new System.Windows.Forms.Button();
-            this.RemoveMappingButton = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DeviceDiscoveryLabel = new System.Windows.Forms.Label();
-            this.MappingInfoButton = new System.Windows.Forms.Button();
             this.MappingUpdateLabel = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -49,7 +46,7 @@
             // 
             this.DevicesComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.DevicesComboBox.FormattingEnabled = true;
-            this.DevicesComboBox.Location = new System.Drawing.Point(12, 54);
+            this.DevicesComboBox.Location = new System.Drawing.Point(12, 52);
             this.DevicesComboBox.Name = "DevicesComboBox";
             this.DevicesComboBox.Size = new System.Drawing.Size(340, 21);
             this.DevicesComboBox.TabIndex = 0;
@@ -58,7 +55,7 @@
             // DevicesLabel
             // 
             this.DevicesLabel.AutoSize = true;
-            this.DevicesLabel.Location = new System.Drawing.Point(12, 38);
+            this.DevicesLabel.Location = new System.Drawing.Point(12, 36);
             this.DevicesLabel.Name = "DevicesLabel";
             this.DevicesLabel.Size = new System.Drawing.Size(112, 13);
             this.DevicesLabel.TabIndex = 1;
@@ -66,45 +63,21 @@
             // 
             // MappingsListBox
             // 
-            this.MappingsListBox.Enabled = false;
             this.MappingsListBox.FormattingEnabled = true;
-            this.MappingsListBox.Location = new System.Drawing.Point(12, 130);
+            this.MappingsListBox.Location = new System.Drawing.Point(12, 128);
             this.MappingsListBox.Name = "MappingsListBox";
-            this.MappingsListBox.Size = new System.Drawing.Size(192, 95);
+            this.MappingsListBox.SelectionMode = System.Windows.Forms.SelectionMode.None;
+            this.MappingsListBox.Size = new System.Drawing.Size(340, 108);
             this.MappingsListBox.TabIndex = 2;
             // 
             // MappingsLabel
             // 
             this.MappingsLabel.AutoSize = true;
-            this.MappingsLabel.Location = new System.Drawing.Point(12, 114);
+            this.MappingsLabel.Location = new System.Drawing.Point(12, 112);
             this.MappingsLabel.Name = "MappingsLabel";
             this.MappingsLabel.Size = new System.Drawing.Size(111, 13);
             this.MappingsLabel.TabIndex = 4;
             this.MappingsLabel.Text = "No device discovered";
-            // 
-            // CreateMappingButton
-            // 
-            this.CreateMappingButton.AccessibleDescription = "Create Mapping";
-            this.CreateMappingButton.Enabled = false;
-            this.CreateMappingButton.Location = new System.Drawing.Point(244, 159);
-            this.CreateMappingButton.Name = "CreateMappingButton";
-            this.CreateMappingButton.Size = new System.Drawing.Size(108, 23);
-            this.CreateMappingButton.TabIndex = 3;
-            this.CreateMappingButton.Text = "Create Mapping";
-            this.CreateMappingButton.UseVisualStyleBackColor = true;
-            // 
-            // RemoveMappingButton
-            // 
-            this.RemoveMappingButton.AccessibleDescription = "Remove Mapping";
-            this.RemoveMappingButton.AccessibleName = "Remove Mapping Button";
-            this.RemoveMappingButton.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.RemoveMappingButton.Enabled = false;
-            this.RemoveMappingButton.Location = new System.Drawing.Point(244, 202);
-            this.RemoveMappingButton.Name = "RemoveMappingButton";
-            this.RemoveMappingButton.Size = new System.Drawing.Size(108, 23);
-            this.RemoveMappingButton.TabIndex = 4;
-            this.RemoveMappingButton.Text = "Remove  Mapping";
-            this.RemoveMappingButton.UseVisualStyleBackColor = true;
             // 
             // menuStrip1
             // 
@@ -128,7 +101,7 @@
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(92, 22);
             this.exitToolStripMenuItem.Text = "E&xit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click_1);
             // 
@@ -142,27 +115,16 @@
             // DeviceDiscoveryLabel
             // 
             this.DeviceDiscoveryLabel.AutoSize = true;
-            this.DeviceDiscoveryLabel.Location = new System.Drawing.Point(12, 78);
+            this.DeviceDiscoveryLabel.Location = new System.Drawing.Point(12, 76);
             this.DeviceDiscoveryLabel.Name = "DeviceDiscoveryLabel";
             this.DeviceDiscoveryLabel.Size = new System.Drawing.Size(112, 13);
             this.DeviceDiscoveryLabel.TabIndex = 6;
             this.DeviceDiscoveryLabel.Text = "Discovering devices...";
             // 
-            // MappingInfoButton
-            // 
-            this.MappingInfoButton.AccessibleDescription = "Mapping Info";
-            this.MappingInfoButton.Enabled = false;
-            this.MappingInfoButton.Location = new System.Drawing.Point(244, 130);
-            this.MappingInfoButton.Name = "MappingInfoButton";
-            this.MappingInfoButton.Size = new System.Drawing.Size(108, 23);
-            this.MappingInfoButton.TabIndex = 8;
-            this.MappingInfoButton.Text = "Mapping Info";
-            this.MappingInfoButton.UseVisualStyleBackColor = true;
-            // 
             // MappingUpdateLabel
             // 
             this.MappingUpdateLabel.AutoSize = true;
-            this.MappingUpdateLabel.Location = new System.Drawing.Point(12, 228);
+            this.MappingUpdateLabel.Location = new System.Drawing.Point(9, 239);
             this.MappingUpdateLabel.Name = "MappingUpdateLabel";
             this.MappingUpdateLabel.Size = new System.Drawing.Size(150, 13);
             this.MappingUpdateLabel.TabIndex = 7;
@@ -172,12 +134,9 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(364, 261);
-            this.Controls.Add(this.MappingInfoButton);
+            this.ClientSize = new System.Drawing.Size(364, 259);
             this.Controls.Add(this.MappingUpdateLabel);
             this.Controls.Add(this.DeviceDiscoveryLabel);
-            this.Controls.Add(this.RemoveMappingButton);
-            this.Controls.Add(this.CreateMappingButton);
             this.Controls.Add(this.MappingsLabel);
             this.Controls.Add(this.MappingsListBox);
             this.Controls.Add(this.DevicesLabel);
@@ -204,14 +163,11 @@
         private System.Windows.Forms.Label DevicesLabel;
         private System.Windows.Forms.ListBox MappingsListBox;
         private System.Windows.Forms.Label MappingsLabel;
-        private System.Windows.Forms.Button CreateMappingButton;
-        private System.Windows.Forms.Button RemoveMappingButton;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.Label DeviceDiscoveryLabel;
-        private System.Windows.Forms.Button MappingInfoButton;
         private System.Windows.Forms.Label MappingUpdateLabel;
     }
 }

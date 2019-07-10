@@ -66,13 +66,13 @@ namespace NatEdit
 
         private void EnableMappingButtons(bool enable)
         {
-            MappingsListBox.Enabled = enable;
-            CreateMappingButton.Enabled = enable;
+            //MappingsListBox.Enabled = enable;
+            //CreateMappingButton.Enabled = enable;
 
             if (MappingsListBox.Items.Count == 0)
                 enable = false;
-            MappingInfoButton.Enabled = enable;
-            RemoveMappingButton.Enabled = enable;
+            //MappingInfoButton.Enabled = enable;
+            //RemoveMappingButton.Enabled = enable;
         }
 
         private void UpdateMappings()
@@ -101,7 +101,7 @@ namespace NatEdit
                                 }
                                 status = "UPnP mappings:";
                                 foreach (Mapping mp in mappings)
-                                    mappingInfo.Add($"{mp.Protocol}://:{mp.PublicPort} -> :{mp.PrivatePort}, {mp.Description}");
+                                    mappingInfo.Add($"{mp.Protocol}://{Device?.ExternalIP}:{mp.PublicPort} -> {mp.PrivateAddress}:{mp.PrivatePort}, {mp.Description}");
                                 break;
 
                             default:
@@ -134,8 +134,8 @@ namespace NatEdit
             MappingsListBox.BeginUpdate();
             MappingsListBox.Items.Clear();
             MappingsListBox.Items.AddRange(mappingInfo);
-            if (mappingInfo.Length > 0)
-                MappingsListBox.SelectedIndex = 0;
+            //if (mappingInfo.Length > 0)
+            //    MappingsListBox.SelectedIndex = 0;
             MappingsListBox.EndUpdate();
             MappingUpdateLabel.Text = $"{DateTime.Now}: mapping updated";
         }

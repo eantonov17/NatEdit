@@ -95,7 +95,8 @@ namespace Mono.Nat.Upnp
 					if (!(resp is GetGenericPortMappingEntryResponseMessage response))
 						break;
 
-					mappings.Add (new Mapping (response.Protocol, response.InternalPort, response.ExternalPort, response.LeaseDuration, response.PortMappingDescription));
+					mappings.Add (new Mapping (response.Protocol, response.InternalClient, response.InternalPort, response.ExternalPort, 
+                        response.LeaseDuration, response.PortMappingDescription));
 				}
 			} catch (MappingException ex) {
 				// Error code 713 means we successfully iterated to the end of the array and have all the mappings.
@@ -122,7 +123,7 @@ namespace Mono.Nat.Upnp
 			var response = await SendMessageAsync (message).ConfigureAwait (false);
 			if (!(response is GetSpecificPortMappingEntryResponseMessage msg))
 				throw new MappingException (ErrorCode.Unknown, "Invalid response received when getting the specific mapping");
-			return new Mapping (protocol, msg.InternalPort, publicPort, msg.LeaseDuration, msg.PortMappingDescription);
+			return new Mapping (protocol, msg.InternalClient, msg.InternalPort, publicPort, msg.LeaseDuration, msg.PortMappingDescription);
 		}
 
 		async Task<ResponseMessage> SendMessageAsync (RequestMessage message)
