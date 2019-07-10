@@ -1,8 +1,12 @@
 # EA17.NatEdit
 **  NatEdit - view and edit Network Address Translation mappings **
+
 *Copyright (C) 2019 Eugene Antonov*
+
 *[Mono.NAT forked at 5c88d93 (C) Mono.NAT copyright holders](https://github.com/mono/Mono.Nat)*
+
 *[NAT icon (C) pngtree.com: free icons from pngtree.com](https://pngtree.com/free-icon>)*
+
 *[png -> ico conversion](https://icoconvert.com/)*
 
 This program is free software: you can redistribute it and/or modify
