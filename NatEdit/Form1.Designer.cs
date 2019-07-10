@@ -39,6 +39,7 @@
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DeviceDiscoveryLabel = new System.Windows.Forms.Label();
             this.MappingUpdateLabel = new System.Windows.Forms.Label();
+            this.DeleteMappingButton = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -66,7 +67,6 @@
             this.MappingsListBox.FormattingEnabled = true;
             this.MappingsListBox.Location = new System.Drawing.Point(12, 128);
             this.MappingsListBox.Name = "MappingsListBox";
-            this.MappingsListBox.SelectionMode = System.Windows.Forms.SelectionMode.None;
             this.MappingsListBox.Size = new System.Drawing.Size(340, 108);
             this.MappingsListBox.TabIndex = 2;
             // 
@@ -101,9 +101,9 @@
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(92, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.exitToolStripMenuItem.Text = "E&xit";
-            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click_1);
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // aboutToolStripMenuItem
             // 
@@ -130,11 +130,22 @@
             this.MappingUpdateLabel.TabIndex = 7;
             this.MappingUpdateLabel.Text = "Mapping discovery in progress...";
             // 
+            // DeleteMappingButton
+            // 
+            this.DeleteMappingButton.Location = new System.Drawing.Point(240, 263);
+            this.DeleteMappingButton.Name = "DeleteMappingButton";
+            this.DeleteMappingButton.Size = new System.Drawing.Size(112, 23);
+            this.DeleteMappingButton.TabIndex = 8;
+            this.DeleteMappingButton.Text = "Delete Mapping";
+            this.DeleteMappingButton.UseVisualStyleBackColor = true;
+            this.DeleteMappingButton.Click += new System.EventHandler(this.DeleteMappingButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(364, 259);
+            this.ClientSize = new System.Drawing.Size(364, 298);
+            this.Controls.Add(this.DeleteMappingButton);
             this.Controls.Add(this.MappingUpdateLabel);
             this.Controls.Add(this.DeviceDiscoveryLabel);
             this.Controls.Add(this.MappingsLabel);
@@ -169,6 +180,7 @@
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.Label DeviceDiscoveryLabel;
         private System.Windows.Forms.Label MappingUpdateLabel;
+        private System.Windows.Forms.Button DeleteMappingButton;
     }
 }
 

@@ -84,7 +84,7 @@ namespace NatEdit
                     Thread.Sleep(5000);
                     var device = Device?.NatDevice;
                     string status = "No device found";
-                    var mappingInfo = new List<string>();
+                    var mappingItems = new List<MappingItem>();
                     if (device != null)
                         switch (device.NatProtocol)
                         {
@@ -100,8 +100,8 @@ namespace NatEdit
                                     break;
                                 }
                                 status = "UPnP mappings:";
-                                foreach (Mapping mp in mappings)
-                                    mappingInfo.Add($"{mp.Protocol}:{mp.PublicPort} -> {mp.PrivateAddress}:{mp.PrivatePort}, {mp.Description}");
+                                foreach (Mapping mapping in mappings)
+                                    mappingItems.Add(new MappingItem(mapping));
                                 break;
 
                             default:
@@ -111,7 +111,7 @@ namespace NatEdit
                     // UI controls must be updated on UI thread
                     Invoke((MethodInvoker)delegate
                     {
-                        UpdateMappingList(status, mappingInfo.ToArray()); // runs on UI thread
+                        UpdateMappingList(status, mappingItems.ToArray()); // runs on UI thread
                     });
                 }
                 catch (ThreadAbortException)
@@ -128,24 +128,40 @@ namespace NatEdit
                 }
         }
 
-        private void UpdateMappingList(string status, string[] mappingInfo)
+        private void UpdateMappingList(string status, MappingItem[] mappingItems)
         {
+            var count = mappingItems.Length;
+            var selected = MappingsListBox.SelectedItem as MappingItem;
+            var topVisible = MappingsListBox.TopIndex;
+            var items = MappingsListBox.Items;
+
             MappingsListBox.BeginUpdate();
-            MappingsListBox.Items.Clear();
-            MappingsListBox.Items.AddRange(mappingInfo);
-            //if (mappingInfo.Length > 0)
-            //    MappingsListBox.SelectedIndex = 0;
+
+            items.Clear();
+            if (count > 0)
+            {
+                items.AddRange(mappingItems);
+                if (selected != null)
+                    for (int i = 0; i < count; ++i)
+                        if (selected.Equals(items[i] as MappingItem))
+                        {
+                            MappingsListBox.SelectedIndex = i;
+                            break;
+                        }
+                MappingsListBox.TopIndex = topVisible < count ? topVisible : count - 1;
+            }
+
             MappingsListBox.EndUpdate();
             MappingsLabel.Text = status;
-            MappingUpdateLabel.Text = $"{DateTime.Now}: mappings updated";
+            MappingUpdateLabel.Text = $"{DateTime.Now}: mappings discovery completed";
         }
 
         private void DevicesComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             Device = DevicesComboBox.SelectedItem as Device;
             MappingsListBox.Items.Clear();
-            MappingsLabel.Text = "Waiting for mapping discovery...";
-            MappingUpdateLabel.Text = $"{DateTime.Now}: updating mappings";
+            MappingsLabel.Text = "Waiting for mappings discovery...";
+            MappingUpdateLabel.Text = $"{DateTime.Now}: started mappings discovery";
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -158,15 +174,23 @@ namespace NatEdit
             new AboutBox1().ShowDialog(this);
         }
 
-        private void exitToolStripMenuItem_Click_1(object sender, EventArgs e)
-        {
-            Close();
-        }
-
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
             doUpdateMappings = false;
             base.OnFormClosing(e);
+        }
+
+        private async void DeleteMappingButton_Click(object sender, EventArgs e)
+        {
+            if (Device == null || !(MappingsListBox.SelectedItem is MappingItem selected))
+                return;
+
+            var res = MessageBox.Show(this, $"Are you sure you want to delete this mapping?\n{selected}",
+                "Delete mapping", MessageBoxButtons.OKCancel,
+                MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
+
+            if (res == DialogResult.OK)
+                await Device.NatDevice.DeletePortMapAsync(selected.Mapping).ConfigureAwait(false);
         }
     }
 }
