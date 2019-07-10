@@ -1,5 +1,5 @@
 # EA17.NatEdit
-**  NatEdit - view and edit Network Address Translation mappings **
+**NatEdit - view and edit Network Address Translation mappings**
 
 *Copyright (C) 2019 Eugene Antonov*
 
